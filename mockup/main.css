@@ -9,7 +9,11 @@ body {
 
 p {
   font-size: 1.7rem;
-  line-height: 150%;
+  line-height: 170%;
+}
+
+section {
+  padding: 1.1em 1.7em;
 }
 
 /* header */
@@ -116,8 +120,18 @@ footer .heart {
   color:#cf2e31;
 }
 
-/* add-card */
+/* about page */
+#about p {
+  max-width: 80%;
+}
+
+/* add-card page */
+.card-preview {
+  margin-top: 1.5em;
+}
+
 .question-input {
   width: 50%;
-  padding: 6px 9px;
+  font-size: 1.8rem;
+  padding: 1.3em;
 }

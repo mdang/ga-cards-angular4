@@ -15,23 +15,22 @@
     </header>
 
     <nav class="tabs">
-      <a href="#" class="active">Home</a>
-      <a href="#">Add a Card</a>
+      <a href="#">Home</a>
+      <a href="#" class="active">Add a Card</a>
       <a href="#">About</a>
     </nav>
 
-    <section id="cards" class="container-fluid">
+    <section id="add-card" class="container-fluid">
       <div class="row">
-        <div class="col-sm-6 col-md-3 col-lg-3">
-          <div class="card">
-            <h4 class="card-title">I couldn't complete my assignment because ________</h4>
-            <h6>Cards Against Assembly</h6>
-          </div>
-        </div>
+        <form name="add-card">
+          <input class="form-control question-input" type="text" name="question" id="question" placeholder="What's your question?">
+        </form>
+      </div>
 
+      <div class="row card-preview">
         <div class="col-sm-6 col-md-3 col-lg-3">
           <div class="card">
-            <h4 class="card-title">I get by with a little help from ________</h4>
+            <h4 class="card-title"></h4>
             <h6>Cards Against Assembly</h6>
           </div>
         </div>
