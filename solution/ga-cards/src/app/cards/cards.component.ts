@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { CardService } from '../card.service';
+import { Card } from '../card/card.type';
 
 @Component({
   selector: 'app-cards',
@@ -8,7 +9,7 @@ import { CardService } from '../card.service';
   styleUrls: ['./cards.component.css']
 })
 export class CardsComponent implements OnInit {
-  cards: any;
+  cards: Card[];
 
   constructor(private cardService: CardService) { }
 

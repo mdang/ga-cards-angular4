@@ -357,6 +357,32 @@ Now that we have the results, let's take advantage of the `*ngFor` structural di
 
 The cards are all on the screen, but the game isn't much fun if the user is able to see what they're picking. Have the question initially hidden until a user clicks on the card, then reveal the question. 
 
+## Custom Data Types
+
+Instead of specifying `card` with a type of `any`, let's take advantage of TypeScript and define a `card` type. 
+
+```js
+// card.type.ts
+export interface Card {
+  _id: number,
+  question: string,
+  createdAt: string
+}
+```
+
+Import our type file into **cards.component.ts**
+```js
+// cards.component.ts
+import { Card } from '../card/card.type';
+``` 
+
+Change our public `cards` declaration to: 
+
+```js
+// cards.component.ts
+cards: Card[];
+```
+
 ## Adding New Cards
 
 > https://angular-2-training-book.rangle.io/handout/forms/template-driven/template-driven_forms.html
@@ -366,10 +392,7 @@ The cards are all on the screen, but the game isn't much fun if the user is able
 > https://angular-2-training-book.rangle.io/handout/forms/reactive-forms/reactive-forms_validation.html
 
 ## Bonus
-
-## Interfaces
-
-- Convert `card` to a strongly typed Card object 
+ 
 
 ## Observables 
 
