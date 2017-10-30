@@ -2,39 +2,3 @@
 .row {
   margin: 0;
 }
-
-.card {
-  background: #231e1e;
-  border-color: black;
-  color: white;
-  padding: 1.8rem 2.2rem;
-  min-height: 30rem;
-  position: relative;
-  max-width: 300px;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.card h4 {
-  font-size: 2rem;
-  line-height: 130%;
-}
-
-.card h6 {
-  position: absolute;
-  font-size: 1.2rem;
-  margin-top: 1.618rem;
-  opacity: 0.2;
-  bottom: 0.618rem;
-  left: 1.6rem;
-}
-
-.card h6:after {
-  font-size: 60%;
-  margin-left: 1px;
-}
-
-.card:hover {
-  cursor: pointer;
-}
