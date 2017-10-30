@@ -11,12 +11,6 @@ export class CardService {
 
   getCards() {
     return this.http
-              .get(`${ environment.apiBaseUrl }/cards`)
-              // .map(response => response.json())
-              // .subscribe(
-              //   card => card,
-              //   err => console.error(err),
-              //   () => console.log('GET /cards complete')
-              // );
+            .get(`${ environment.apiBaseUrl }/cards`);
   }
 }

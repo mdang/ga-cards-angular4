@@ -14,13 +14,9 @@ export class CardsComponent implements OnInit {
 
   ngOnInit() {
     this.cardService.getCards()
-      .subscribe(response => {
-        this.cards = response.json()
-        console.log('this.cards', this.cards);
-      });
-
-    // this.cards = this.cardService.getCards();
-    // console.log('i got some cards', this.cards);
+      .subscribe(
+        response => this.cards = response.json(),
+        err => console.error(err),
+        () => console.log('GET /cards complete'));
   }
-
 }
