@@ -12,6 +12,9 @@ import { AboutComponent } from './about/about.component';
 
 import { AppRoutingModule } from './app-routing.module';
 
+import { CardService } from './card.service';
+import { HttpModule } from '@angular/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,9 +28,10 @@ import { AppRoutingModule } from './app-routing.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpModule
   ],
-  providers: [],
+  providers: [ CardService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
