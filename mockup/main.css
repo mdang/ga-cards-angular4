@@ -18,10 +18,11 @@ section {
 
 /* header */
 header {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #ccc;
   padding-bottom: 1rem;
   margin-bottom: 1.6rem;
   margin-left: 1.5rem;
+  margin-right: 1.5rem;
 }
 
 header.navbar {
@@ -67,7 +68,6 @@ nav.tabs a.active {
   margin: 0;
 }
 
-/* card */
 .card {
   background: #231e1e;
   border-color: black;
