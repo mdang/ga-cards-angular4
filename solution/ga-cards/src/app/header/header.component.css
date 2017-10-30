@@ -1,0 +1,25 @@
+/* header */
+header {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 1rem;
+  margin-bottom: 1.6rem;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
+
+header.navbar {
+  border-radius: 0;
+}
+
+h1 {
+  font-weight: bold;
+  letter-spacing: -2px;
+  max-width: 100px;
+}
+
+h1:after, .card h6:after {
+  content: "™";
+  font-size: 1rem;
+  vertical-align: super;
+  margin-left: 0.192rem;
+}

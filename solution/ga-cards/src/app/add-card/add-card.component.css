@@ -1,0 +1,10 @@
+/* add-card page */
+.card-preview {
+  margin-top: 1.5em;
+}
+
+.question-input {
+  width: 50%;
+  font-size: 1.8rem;
+  padding: 1.3em;
+}

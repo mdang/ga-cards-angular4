@@ -1,0 +1,15 @@
+/* footer */
+footer {
+  text-align: center;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+}
+
+footer p {
+  font-size: 1.5rem;
+  color: #999;
+}
+
+footer .heart {
+  color:#cf2e31;
+}

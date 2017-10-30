@@ -1,0 +1,18 @@
+/* You can add global styles to this file, and also import other style files */
+/* global */
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #eee;
+  font-size: 16px;
+}
+
+p {
+  font-size: 1.7rem;
+  line-height: 170%;
+}
+
+section {
+  padding: 1.1em 1.7em;
+}
