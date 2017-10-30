@@ -92,7 +92,7 @@ Generate the components we'll need:
 - `$ ng g c about`
 - `$ ng g c footer`
 
-Next: 
+### Exercise (15 min)
 
 - Fill in the placeholder components with the static HTML from our mockups
 - Seperate the CSS in our **main.css** file to the relevant components
@@ -191,3 +191,16 @@ import { AppRoutingModule } from './app-routing.module';
 ```html
 <a routerLink="/about">About</a>
 ```
+
+We still have a problem though, our active link is showing as **Home** and not changing as the user clicks the different links. 😢
+
+### Exercise (15 min)
+
+Figure out a way we can set the active link for the navigation items. We need to set a class of `active` on the currently active link. 
+
+## Using the Card Component within Cards
+
+
+
+
+

@@ -1,5 +1,5 @@
 <nav class="tabs">
-  <a routerLink="/" class="active">Home</a>
-  <a routerLink="/add-card">Add a Card</a>
-  <a routerLink="/about">About</a>
+  <a routerLink="/cards" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+  <a routerLink="/add-card" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Add a Card</a>
+  <a routerLink="/about" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">About</a>
 </nav>
