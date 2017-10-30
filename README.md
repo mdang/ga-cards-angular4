@@ -1,5 +1,7 @@
 # Cards Against Assembly
 
+> Angular 4 Version
+
 ## Preparation 
 
 - [Angular CLI](https://cli.angular.io/)
@@ -18,7 +20,7 @@ Cards are user generated and initially appear face down until a user clicks on t
 - **GET** [https://ga-cards.herokuapp.com/cards](https://ga-cards.herokuapp.com/cards)
 	- Note: Older cards don't have a `createdAt` value
 
-```json
+```js
 [
 	{
 		_id: "5631462be4b07f34b0915a0c",
@@ -48,7 +50,7 @@ Cards are user generated and initially appear face down until a user clicks on t
 ```
 
 - **POST** [https://ga-cards.herokuapp.com/cards](https://ga-cards.herokuapp.com/cards)
-	- Parameter: `question` - **Required** - Question to add
+	- Parameter: `question` - **required** - Question to add
 
 ## Adding Dependencies
 
@@ -173,10 +175,10 @@ import { AppRoutingModule } from './app-routing.module';
 ```js
 // app.module.ts
 // ...
-	imports: [
-		BrowserModule,
-		AppRoutingModule
-	]
+  imports: [
+	BrowserModule,
+	AppRoutingModule
+  ]
 // ...
 ```
 
@@ -278,7 +280,7 @@ import { HttpModule } from '@angular/http';
 
 Import our environment variables to use within our service. 
 
-```
+```js
 // card.service.ts
 import { environment } from '../environments/environment';
 ```
@@ -330,6 +332,7 @@ cards: any;
 Take advantage of our observable API call
 
 ```js
+// cards.component.ts
 ngOnInit() {
     this.cardService.getCards()
       .subscribe(
@@ -350,9 +353,17 @@ Now that we have the results, let's take advantage of the `*ngFor` structural di
 </section>
 ```
 
-### Exercise (20 min)
+### Exercise (15 min)
 
 The cards are all on the screen, but the game isn't much fun if the user is able to see what they're picking. Have the question initially hidden until a user clicks on the card, then reveal the question. 
+
+## Adding New Cards
+
+> https://angular-2-training-book.rangle.io/handout/forms/template-driven/template-driven_forms.html
+
+## Validation 
+
+> https://angular-2-training-book.rangle.io/handout/forms/reactive-forms/reactive-forms_validation.html
 
 ## Bonus
 
