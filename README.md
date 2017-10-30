@@ -1,1 +1,2 @@
-# ga-cards-angular4
+# Cards Against Assembly
+
