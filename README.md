@@ -92,7 +92,7 @@ Generate the components we'll need:
 - `$ ng g c about`
 - `$ ng g c footer`
 
-### Exercise (15 min)
+### Exercise (20 min)
 
 - Fill in the placeholder components with the static HTML from our mockups
 - Seperate the CSS in our **main.css** file to the relevant components
@@ -198,9 +198,168 @@ We still have a problem though, our active link is showing as **Home** and not c
 
 Figure out a way we can set the active link for the navigation items. We need to set a class of `active` on the currently active link. 
 
-## Using the Card Component within Cards
+Are you stuck? [Click here for a hint](https://angular.io/api/router/RouterLinkActive)
 
+## The Card Component
 
+Change the `CardsComponent` so that it's using the `CardComponent`
 
+```html
+<!-- cards.component.html -->
+<section id="cards" class="container-fluid">
+  <div class="row">
+    <app-card></app-card>
+    <app-card></app-card>
+    <app-card></app-card>
+  </div>
+</section>
+```
 
+We have an issue, every card is the same which doesn't make for an interesting game. Let's fix that by thinking about how we would want to use the `<app-card>` component. We might think about projecting content in this manner: 
 
+```html
+<app-card>CODA is like ___________</app-card>
+```
+
+Change the cards to allow passing in a question.
+
+```html
+<!-- cards.component.html -->
+<section id="cards" class="container-fluid">
+  <div class="row">
+    <app-card>CODA is like ___________</app-card>
+    <app-card>Today is ___________</app-card>
+    <app-card>Mike is too cool for ___________</app-card>
+  </div>
+</section>
+```
+
+Change **card.component.html** to use projection by replacing the hard-coded question with:
+
+```html
+<ng-content></ng-content>
+```
+
+## Configure Environment Variables
+
+When we generate a project using the Angular CLI, we're provided with files we can use to configure values depending on what environment we're building for. 
+
+Let's add in a value for our API base URL so this could change depending on whether the code is running in development or production. We'll use this in the service we create next. 
+
+```js
+// environments/environment.ts
+export const environment = {
+  production: false,
+  apiBaseUrl: 'https://ga-cards.herokuapp.com'
+};
+```
+
+## Card Service
+
+Let's develop an Angular service that can be used by all components in our application. 
+
+```
+$ ng g s card
+```
+
+Import the CardService to **app.module.ts** and add it as a provider in the `providers` array. 
+
+```js
+// app.module.ts
+import { CardService } from './card.service';
+```
+
+Import the HttpModule to **app.module.ts** and add it to the `imports` array.  
+
+```js
+// app.module.ts
+import { HttpModule } from '@angular/http';
+```
+
+Import our environment variables to use within our service. 
+
+```
+// card.service.ts
+import { environment } from '../environments/environment';
+```
+
+Create a method called `getCards()` to make a request to our Cards API. This is what our service should look like now:
+
+```js
+// card.service.ts
+import { Injectable } from '@angular/core';
+
+import { environment } from '../environments/environment';
+import { Http } from '@angular/http';
+
+@Injectable()
+export class CardService {
+
+  constructor(private http: Http) { }
+
+  getCards() {
+    return this.http
+            .get(`${ environment.apiBaseUrl }/cards`);
+  }
+}
+```
+
+Let's use the `CardService` within our `CardsComponent` in order to get the cards from the API. 
+
+Import the `CardService`
+
+```js
+// cards.component.ts
+import { CardService } from '../card.service';
+```
+
+Inject our `CardService` into the component
+
+```js
+// cards.component.ts
+constructor(private cardService: CardService) { }
+```
+
+Add a public `cards` property 
+
+```js
+// cards.component.ts
+cards: any;
+```
+
+Take advantage of our observable API call
+
+```js
+ngOnInit() {
+    this.cardService.getCards()
+      .subscribe(
+        response => this.cards = response.json(),
+        err => console.error(err),
+        () => console.log('GET /cards complete'));
+}
+```
+
+Now that we have the results, let's take advantage of the `*ngFor` structural directive to output the cards into the view. 
+
+```html
+<!-- cards.component.html --> 
+<section id="cards" class="container-fluid">
+  <div class="row">
+    <app-card *ngFor="let card of cards">{{ card.question }}</app-card>
+  </div>
+</section>
+```
+
+### Exercise (20 min)
+
+The cards are all on the screen, but the game isn't much fun if the user is able to see what they're picking. Have the question initially hidden until a user clicks on the card, then reveal the question. 
+
+## Bonus
+
+## Interfaces
+
+- Convert `card` to a strongly typed Card object 
+
+## Observables 
+
+- Filter out cards without a `createdAt` date

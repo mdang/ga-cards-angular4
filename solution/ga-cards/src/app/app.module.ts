@@ -31,7 +31,7 @@ import { HttpModule } from '@angular/http';
     AppRoutingModule,
     HttpModule
   ],
-  providers: [ CardService ],
+  providers: [CardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
