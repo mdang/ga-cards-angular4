@@ -9,7 +9,7 @@
 
 ## Demo
 
-> [ga-cards.herokuapp.com](https://ga-cards.herokuapp.com/)
+> [ga-cards.herokuapp.com](https://mdang.github.io/ga-cards-angular4)
 
 Cards are user generated and initially appear face down until a user clicks on the card, which then reveals it.
 
