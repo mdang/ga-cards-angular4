@@ -295,6 +295,8 @@ import { Injectable } from '@angular/core';
 import { environment } from '../environments/environment';
 import { Http } from '@angular/http';
 
+import 'rxjs/add/operator/map';
+
 @Injectable()
 export class CardService {
 
@@ -302,7 +304,8 @@ export class CardService {
 
   getCards() {
     return this.http
-            .get(`${ environment.apiBaseUrl }/cards`);
+            .get(`${ environment.apiBaseUrl }/cards`)
+            .map(response => response.json());
   }
 }
 ```
@@ -337,7 +340,7 @@ Take advantage of our observable API call
 ngOnInit() {
     this.cardService.getCards()
       .subscribe(
-        response => this.cards = response.json(),
+        cards => this.cards = cards,
         err => console.error(err),
         () => console.log('GET /cards complete'));
 }
@@ -460,7 +463,8 @@ Now that we're able to get the question that a user submitted, let's modify our 
 // card.service.ts
 addCard(card) {
   return this.http
-           .post(`${ environment.apiBaseUrl }/cards`, card);
+           .post(`${ environment.apiBaseUrl }/cards`, card)
+           .map(response => response.json());;
 }
 ```
 
@@ -494,7 +498,7 @@ export class AddCardComponent implements OnInit {
     
     this.cardService.addCard(this.card)
       .subscribe(
-        response => console.log('Card saved:', response.json()),
+        card => console.log('Card saved:', card),
         err => console.error(err),
         () => console.log('Request complete'));
   }
@@ -534,7 +538,7 @@ export class AddCardComponent implements OnInit {
     
     this.cardService.addCard(this.card)
       .subscribe(
-        response => console.log('Card saved:', response.json()),
+        card => console.log('Card saved:', card),
         err => console.error(err),
         () => this.router.navigateByUrl('/cards'));
   }
@@ -543,8 +547,6 @@ export class AddCardComponent implements OnInit {
 }
 ```
 
-## Bonus
- 
-Filter out cards from the API without a `createdAt` date. 
+Fini!
 
 

@@ -25,7 +25,7 @@ export class AddCardComponent implements OnInit {
 
     this.cardService.addCard(this.card)
       .subscribe(
-        response => console.log('Card saved:', response.json()),
+        card => console.log('Card saved:', card),
         err => console.error(err),
         () => this.router.navigateByUrl('/cards'));
   }
