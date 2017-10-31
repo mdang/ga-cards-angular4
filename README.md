@@ -485,6 +485,7 @@ import { CardService } from '../card.service';
 })
 export class AddCardComponent implements OnInit {
   card: Card;
+  question: string;
 
   constructor(private cardService: CardService) { }
 
@@ -525,6 +526,7 @@ import { CardService } from '../card.service';
 })
 export class AddCardComponent implements OnInit {
   card: Card;
+  question: string;
 
   constructor(private cardService: CardService, private router: Router) { }
 
