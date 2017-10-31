@@ -184,8 +184,8 @@ import { AppRoutingModule } from './app-routing.module';
 
 - Test our routes: 
   - [http://localhost:4200/cards](http://localhost:4200/cards)
-  - [http://localhost:4200/add-card](http://localhost:4200/add-card)
-  - [http://localhost:4200/about](http://localhost:4200/about) - Check the styling for the card!
+  - [http://localhost:4200/add-card](http://localhost:4200/add-card) - Check the styling for the card!
+  - [http://localhost:4200/about](http://localhost:4200/about)
   - [http://localhost:4200/fake-route-that-does-not-exist](http://localhost:4200/fake-route-that-does-not-exist)
 
 - Update our navigtion links to use the router: 
