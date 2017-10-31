@@ -103,9 +103,9 @@ Generate the components we'll need:
 ### Exercise (20 min)
 
 - Fill in the placeholder components with the static HTML from our mockups
-- Seperate the CSS in our **main.css** file to the relevant components
+- Separate the CSS in our **main.css** file to the relevant components
 
-NOTE: Don't worry about the `<app-card>` component for now, we'll come back to that. 
+> Don't worry about the `<app-card>` component for now, we'll come back to that. 
 
 ## Router Setup
 
@@ -211,7 +211,7 @@ Are you stuck? [Click here for a hint](https://angular.io/api/router/RouterLinkA
 
 ## The Card Component
 
-Change the `CardsComponent` so that it's using the `CardComponent`
+Update the `CardsComponent` so that it's using the `CardComponent`
 
 ```html
 <!-- cards.component.html -->
@@ -259,6 +259,14 @@ Let's add in a value for our API base URL so this could change depending on whet
 // environments/environment.ts
 export const environment = {
   production: false,
+  apiBaseUrl: 'https://ga-cards.herokuapp.com'
+};
+```
+
+```js
+// environments/environment.prod.ts
+export const environment = {
+  production: true,
   apiBaseUrl: 'https://ga-cards.herokuapp.com'
 };
 ```
