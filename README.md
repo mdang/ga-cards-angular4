@@ -52,9 +52,15 @@ Cards are user generated and initially appear face down until a user clicks on t
 - **POST** [https://ga-cards.herokuapp.com/cards](https://ga-cards.herokuapp.com/cards)
 	- Parameter: `question` - **required** - Question to add
 
+## Getting Started
+
+- Navigate to the [starter code](./starter/) folder
+- Create a new Angular application with `$ ng new ga-cards --skip-install`
+- `cd` into the **ga-cards** directory
+
 ## Adding Dependencies
 
-- Navigate to the [starter code](./starter/ga-cards/) and install dependencies with `$ npm i`
+- Install dependencies with `$ npm i`
 - The app uses [Bootstrap](https://getbootstrap.com/), so add Bootstrap either locally or through a CDN within the base **index.html** page 
 
 ## Plan Components 
@@ -547,6 +553,12 @@ export class AddCardComponent implements OnInit {
 
   ngOnInit() { }
 }
+```
+
+## Deployment
+
+```
+$ ng build --prod
 ```
 
 Fini!
