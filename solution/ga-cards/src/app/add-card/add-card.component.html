@@ -4,12 +4,14 @@
       name="add-card"
       (ngSubmit)="handleSubmit(addCardForm)"
       #addCardForm="ngForm">
-      <input
-        class="form-control question-input"
-        [(ngModel)]="question"
-        type="text"
-        name="question"
-        placeholder="What's your question?">
+      <fieldset ngModelGroup="card">
+        <input
+          class="form-control question-input"
+          [(ngModel)]="question"
+          type="text"
+          name="question"
+          placeholder="What's your question?">
+      </fieldset>
     </form>
   </div>
 

@@ -1,5 +1,5 @@
 export interface Card {
-  _id: number,
+  _id?: number,
   question: string,
-  createdAt: string
+  createdAt?: string
 }

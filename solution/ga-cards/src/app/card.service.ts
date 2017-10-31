@@ -12,4 +12,9 @@ export class CardService {
     return this.http
             .get(`${ environment.apiBaseUrl }/cards`);
   }
+
+  addCard(card) {
+    return this.http
+            .post(`${ environment.apiBaseUrl }/cards`, card);
+  }
 }

@@ -365,9 +365,9 @@ Instead of specifying `card` with a type of `any`, let's take advantage of TypeS
 ```js
 // card.type.ts
 export interface Card {
-  _id: number,
+  _id?: number,
   question: string,
-  createdAt: string
+  createdAt?: string
 }
 ```
 
@@ -395,7 +395,12 @@ import { FormsModule } from '@angular/forms';
 
 We want to show a live preview of the question as the user is typing, so we'll make use of two-way data binding, that way as the form value is updated we can ensure the preview is updated as well. 
 
-Start by modifying the form itself and adding a reference to the form, as well as adding a submit handler using the `ngSubmit` event. 
+Let's modify the form by: 
+
+ - Adding a reference to the form so we can obtain the values entered later
+ - Adding a submit handler using the `ngSubmit` event 
+ - Modify the input to use two-way data binding for our live preview 
+ - Nest our data for organization using the `ngModelGroup` directive  
 
 ```html
 <!-- add-card.component.html -->
@@ -403,20 +408,16 @@ Start by modifying the form itself and adding a reference to the form, as well a
   name="add-card"
   (ngSubmit)="handleSubmit(addCardForm)"
   #addCardForm="ngForm">
-  <!-- ... ->
+  <fieldset ngModelGroup="card">
+    <input
+      class="form-control question-input"
+      [(ngModel)]="question"
+      type="text"
+      name="question"
+      placeholder="What's your question?">
+  </fieldset>
 </form>
-```
-
-Modify the input to use two-way data binding: 
-
-```html
-<input
-  class="form-control question-input"
-  [(ngModel)]="question"
-  type="text"
-  name="question"
-  placeholder="What's your question?">
-```
+``` 
 
 Update the card preview with the bound `question` form value. 
 
@@ -429,7 +430,6 @@ Finally, we need to add the function that gets called when a user submits the fo
 ```js
 // add-card.component.ts
 import { Component, OnInit } from '@angular/core';
-
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -442,18 +442,18 @@ export class AddCardComponent implements OnInit {
   constructor() { }
 
   handleSubmit(form: NgForm) {
-    console.log('form has been submitted', form.value)
+    console.log('form submitted', form.value)
   }
 
   ngOnInit() { }
 }
 ```
 
-
-
 ## Adding New Cards
 
-> https://angular-2-training-book.rangle.io/handout/forms/template-driven/template-driven_forms.html
+Now that we're able to get the question that a user submitted, let's modify our `CardService` to save that question to the Cards API. 
+
+
 
 ## Validation 
 
