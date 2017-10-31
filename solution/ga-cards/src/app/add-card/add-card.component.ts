@@ -16,9 +16,13 @@ export class AddCardComponent implements OnInit {
   constructor(private cardService: CardService, private router: Router) { }
 
   handleSubmit(form: NgForm) {
-    console.log('form submitted', form.value);
-
     this.card = form.value.card;
+
+    if (!this.card.question) {
+      // @TODO Report error in the UI
+      return;
+    }
+
     this.cardService.addCard(this.card)
       .subscribe(
         response => console.log('Card saved:', response.json()),

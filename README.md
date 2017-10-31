@@ -401,6 +401,7 @@ Let's modify the form by:
  - Adding a submit handler using the `ngSubmit` event 
  - Modify the input to use two-way data binding for our live preview 
  - Nest our data for organization using the `ngModelGroup` directive  
+ - Adding `required` and `maxlength` attributes
 
 ```html
 <!-- add-card.component.html -->
@@ -414,7 +415,9 @@ Let's modify the form by:
       [(ngModel)]="question"
       type="text"
       name="question"
-      placeholder="What's your question?">
+      placeholder="What's your question?"
+      required
+      maxlength="255">
   </fieldset>
 </form>
 ``` 
@@ -451,17 +454,97 @@ export class AddCardComponent implements OnInit {
 
 ## Adding New Cards
 
-Now that we're able to get the question that a user submitted, let's modify our `CardService` to save that question to the Cards API. 
+Now that we're able to get the question that a user submitted, let's modify our `CardService` to save the question to the Cards API. 
 
+```js
+// card.service.ts
+addCard(card) {
+  return this.http
+           .post(`${ environment.apiBaseUrl }/cards`, card);
+}
+```
 
+Now we'll import `CardService` into **add-card.component.ts** and utilize the service we created. 
 
-## Validation 
+```js
+// add-card.component.ts
+import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
-> https://angular-2-training-book.rangle.io/handout/forms/reactive-forms/reactive-forms_validation.html
+import { Card } from '../card/card.type';
+import { CardService } from '../card.service';
+
+@Component({
+  selector: 'app-add-card',
+  templateUrl: './add-card.component.html',
+  styleUrls: ['./add-card.component.css']
+})
+export class AddCardComponent implements OnInit {
+  card: Card;
+
+  constructor(private cardService: CardService) { }
+
+  handleSubmit(form: NgForm) {
+    this.card = form.value.card;
+    
+    if (!this.card.question) {
+      // @TODO Report error in the UI
+      return;
+    }
+    
+    this.cardService.addCard(this.card)
+      .subscribe(
+        response => console.log('Card saved:', response.json()),
+        err => console.error(err),
+        () => console.log('Request complete'));
+  }
+
+  ngOnInit() { }
+}
+```
+
+When the card is successfully saved let's redirect the user back to `/cards`. We'll need the `Router` for that. 
+
+```js
+// add-card.component.ts
+import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+
+import { Card } from '../card/card.type';
+import { CardService } from '../card.service';
+
+@Component({
+  selector: 'app-add-card',
+  templateUrl: './add-card.component.html',
+  styleUrls: ['./add-card.component.css']
+})
+export class AddCardComponent implements OnInit {
+  card: Card;
+
+  constructor(private cardService: CardService, private router: Router) { }
+
+  handleSubmit(form: NgForm) {
+    this.card = form.value.card;
+    
+    if (!this.card.question) {
+      // @TODO Report error in the UI
+      return;
+    }
+    
+    this.cardService.addCard(this.card)
+      .subscribe(
+        response => console.log('Card saved:', response.json()),
+        err => console.error(err),
+        () => this.router.navigateByUrl('/cards'));
+  }
+
+  ngOnInit() { }
+}
+```
 
 ## Bonus
  
+Filter out cards from the API without a `createdAt` date. 
 
-## Observables 
 
-- Filter out cards without a `createdAt` date
