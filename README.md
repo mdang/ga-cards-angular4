@@ -63,22 +63,22 @@ Cards are user generated and initially appear face down until a user clicks on t
 
 ```html
 <app-root>
-	<app-header></app-header>
-	<app-nav></app-nav>
+  <app-header></app-header>
+  <app-nav></app-nav>
 	
-	<!-- cards state -->
-	<app-cards>
-		<app-card></app-card>
-		<app-card></app-card>
-	</app-cards>
+  <!-- cards state -->
+  <app-cards>
+    <app-card></app-card>
+    <app-card></app-card>
+  </app-cards>
 	
-	<!-- add card state -->
-	<app-add-card></app-add-card>
+  <!-- add card state -->
+  <app-add-card></app-add-card>
 	
-	<!-- about state -->
-	<app-about></app-about>
+  <!-- about state -->
+  <app-about></app-about>
 	
-	<app-footer></app-footer>
+  <app-footer></app-footer>
 </app-root>
 ```
 
@@ -176,8 +176,8 @@ import { AppRoutingModule } from './app-routing.module';
 // app.module.ts
 // ...
   imports: [
-	BrowserModule,
-	AppRoutingModule
+    BrowserModule,
+    AppRoutingModule
   ]
 // ...
 ```
@@ -191,6 +191,7 @@ import { AppRoutingModule } from './app-routing.module';
 - Update our navigtion links to use the router: 
 
 ```html
+<!-- nav.component.html -->
 <a routerLink="/about">About</a>
 ```
 
@@ -382,6 +383,73 @@ Change our public `cards` declaration to:
 // cards.component.ts
 cards: Card[];
 ```
+
+## Preview for Adding a Card
+
+Import the `FormsModule` into **app.module.ts** and add it to the `imports` array
+
+```js
+// app.module.ts
+import { FormsModule } from '@angular/forms';
+```
+
+We want to show a live preview of the question as the user is typing, so we'll make use of two-way data binding, that way as the form value is updated we can ensure the preview is updated as well. 
+
+Start by modifying the form itself and adding a reference to the form, as well as adding a submit handler using the `ngSubmit` event. 
+
+```html
+<!-- add-card.component.html -->
+<form
+  name="add-card"
+  (ngSubmit)="handleSubmit(addCardForm)"
+  #addCardForm="ngForm">
+  <!-- ... ->
+</form>
+```
+
+Modify the input to use two-way data binding: 
+
+```html
+<input
+  class="form-control question-input"
+  [(ngModel)]="question"
+  type="text"
+  name="question"
+  placeholder="What's your question?">
+```
+
+Update the card preview with the bound `question` form value. 
+
+```html
+<h4 class="card-title">{{ question }}</h4>
+```
+
+Finally, we need to add the function that gets called when a user submits the form. 
+
+```js
+// add-card.component.ts
+import { Component, OnInit } from '@angular/core';
+
+import { NgForm } from '@angular/forms';
+
+@Component({
+  selector: 'app-add-card',
+  templateUrl: './add-card.component.html',
+  styleUrls: ['./add-card.component.css']
+})
+export class AddCardComponent implements OnInit {
+
+  constructor() { }
+
+  handleSubmit(form: NgForm) {
+    console.log('form has been submitted', form.value)
+  }
+
+  ngOnInit() { }
+}
+```
+
+
 
 ## Adding New Cards
 

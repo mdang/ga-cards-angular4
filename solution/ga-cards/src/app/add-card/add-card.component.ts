@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { NgForm } from '@angular/forms';
+
 @Component({
   selector: 'app-add-card',
   templateUrl: './add-card.component.html',
@@ -9,7 +11,9 @@ export class AddCardComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  handleSubmit(form: NgForm) {
+    console.log('form has been submitted', form.value)
   }
 
+  ngOnInit() { }
 }

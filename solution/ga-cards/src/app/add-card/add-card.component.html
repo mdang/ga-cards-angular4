@@ -1,14 +1,22 @@
 <section id="add-card" class="container-fluid">
   <div class="row">
-    <form name="add-card">
-      <input class="form-control question-input" type="text" name="question" id="question" placeholder="What's your question?">
+    <form
+      name="add-card"
+      (ngSubmit)="handleSubmit(addCardForm)"
+      #addCardForm="ngForm">
+      <input
+        class="form-control question-input"
+        [(ngModel)]="question"
+        type="text"
+        name="question"
+        placeholder="What's your question?">
     </form>
   </div>
 
   <div class="row card-preview">
     <div class="col-sm-6 col-md-3 col-lg-3">
       <div class="card">
-        <h4 class="card-title"></h4>
+        <h4 class="card-title">{{ question }}</h4>
         <h6>Cards Against Assembly</h6>
       </div>
     </div>
