@@ -2,7 +2,7 @@
 
 > Angular 4 Version
 
-## Preparation 
+## Preparation
 
 - [Angular CLI](https://cli.angular.io/)
 - Understanding of fundamental concepts for Angular 2+
@@ -15,7 +15,7 @@ Cards are user generated and initially appear face down until a user clicks on t
 
 ![screenshot](./assets/screenshot.png)
 
-## Cards API 
+## Cards API
 
 - **GET** [https://ga-cards.herokuapp.com/cards](https://ga-cards.herokuapp.com/cards)
 	- Note: Older cards don't have a `createdAt` value
@@ -50,7 +50,21 @@ Cards are user generated and initially appear face down until a user clicks on t
 ```
 
 - **POST** [https://ga-cards.herokuapp.com/cards](https://ga-cards.herokuapp.com/cards)
-	- Parameter: `question` - **required** - Question to add
+
+**Parameters**
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Type</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>question</td>
+    <td>string</td>
+    <td>(required) The question to add to the new card.
+  </tr>
+</table>
 
 ## Getting Started
 
@@ -61,34 +75,34 @@ Cards are user generated and initially appear face down until a user clicks on t
 ## Adding Dependencies
 
 - Install dependencies with `$ npm i`
-- The app uses [Bootstrap](https://getbootstrap.com/), so add Bootstrap either locally or through a CDN within the base **index.html** page 
+- The app uses [Bootstrap](https://getbootstrap.com/), so add Bootstrap either locally or through a CDN within the base **index.html** page
 
-## Plan Components 
+## Plan Components
 
-- Look through the mockup and figure out what components our app will require 
+- Look through the mockup and figure out what components our app will require
 
 ```html
 <app-root>
   <app-header></app-header>
   <app-nav></app-nav>
-	
+
   <!-- cards state -->
   <app-cards>
     <app-card></app-card>
     <app-card></app-card>
   </app-cards>
-	
+
   <!-- add card state -->
   <app-add-card></app-add-card>
-	
+
   <!-- about state -->
   <app-about></app-about>
-	
+
   <app-footer></app-footer>
 </app-root>
 ```
 
-## Create Components 
+## Create Components
 
 Generate the components we'll need:
 
@@ -105,7 +119,7 @@ Generate the components we'll need:
 - Fill in the placeholder components with the static HTML from our mockups
 - Separate the CSS in our **main.css** file to the relevant components
 
-> Don't worry about the `<app-card>` component for now, we'll come back to that. 
+> Don't worry about the `<app-card>` component for now, we'll come back to that.
 
 ## Router Setup
 
@@ -117,7 +131,7 @@ Generate the components we'll need:
 ```
 
 - Create the file **src/app/app-routing.module.ts**
-- Import router dependencies: 
+- Import router dependencies:
 
 ```js
 // app-routing.module.ts
@@ -125,7 +139,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 ```
 
-- Import components required: 
+- Import components required:
 
 ```js
 // app-routing.module.ts
@@ -134,7 +148,7 @@ import { AddCardComponent } from './add-card/add-card.component';
 import { AboutComponent } from './about/about.component';
 ```
 
-- Configure routes 
+- Configure routes
 
 ```js
 // app-routing.module.ts
@@ -158,7 +172,7 @@ const routes: Routes = [
 ];
 ```
 
-- Create the router 
+- Create the router
 
 ```js
 // app-routing.module.ts
@@ -176,7 +190,7 @@ export class AppRoutingModule {}
 import { AppRoutingModule } from './app-routing.module';
 ```
 
-- Import the `AppRoutingModule` into the core app component 
+- Import the `AppRoutingModule` into the core app component
 
 ```js
 // app.module.ts
@@ -188,13 +202,13 @@ import { AppRoutingModule } from './app-routing.module';
 // ...
 ```
 
-- Test our routes: 
+- Test our routes:
   - [http://localhost:4200/cards](http://localhost:4200/cards)
   - [http://localhost:4200/add-card](http://localhost:4200/add-card) - Check the styling for the card!
   - [http://localhost:4200/about](http://localhost:4200/about)
   - [http://localhost:4200/fake-route-that-does-not-exist](http://localhost:4200/fake-route-that-does-not-exist)
 
-- Update our navigtion links to use the router: 
+- Update our navigtion links to use the router:
 
 ```html
 <!-- nav.component.html -->
@@ -205,7 +219,7 @@ We still have a problem though, our active link is showing as **Home** and not c
 
 ### Exercise (15 min)
 
-Figure out a way we can set the active link for the navigation items. We need to set a class of `active` on the currently active link. 
+Figure out a way we can set the active link for the navigation items. We need to set a class of `active` on the currently active link.
 
 Are you stuck? [Click here for a hint](https://angular.io/api/router/RouterLinkActive)
 
@@ -224,7 +238,7 @@ Update the `CardsComponent` so that it's using the `CardComponent`
 </section>
 ```
 
-We have an issue, every card is the same which doesn't make for an interesting game. Let's fix that by thinking about how we would want to use the `<app-card>` component. We might think about projecting content in this manner: 
+We have an issue, every card is the same which doesn't make for an interesting game. Let's fix that by thinking about how we would want to use the `<app-card>` component. We might think about projecting content in this manner:
 
 ```html
 <app-card>CODA is like ___________</app-card>
@@ -251,9 +265,9 @@ Change **card.component.html** to use projection by replacing the hard-coded que
 
 ## Configure Environment Variables
 
-When we generate a project using the Angular CLI, we're provided with files we can use to configure values depending on what environment we're building for. 
+When we generate a project using the Angular CLI, we're provided with files we can use to configure values depending on what environment we're building for.
 
-Let's add in a value for our API base URL so this could change depending on whether the code is running in development or production. We'll use this in the service we create next. 
+Let's add in a value for our API base URL so this could change depending on whether the code is running in development or production. We'll use this in the service we create next.
 
 ```js
 // environments/environment.ts
@@ -273,13 +287,13 @@ export const environment = {
 
 ## Card Service
 
-Let's develop an Angular service that can be used by all components in our application. 
+Let's develop an Angular service that can be used by all components in our application.
 
 ```
 $ ng g s card
 ```
 
-Import the CardService to **app.module.ts** and add it as a provider in the `providers` array. 
+Import the CardService to **app.module.ts** and add it as a provider in the `providers` array.
 
 ```js
 // app.module.ts
@@ -293,7 +307,7 @@ Import the HttpModule to **app.module.ts** and add it to the `imports` array.
 import { HttpModule } from '@angular/http';
 ```
 
-Import our environment variables to use within our service. 
+Import our environment variables to use within our service.
 
 ```js
 // card.service.ts
@@ -324,7 +338,7 @@ export class CardService {
 }
 ```
 
-Let's use the `CardService` within our `CardsComponent` in order to get the cards from the API. 
+Let's use the `CardService` within our `CardsComponent` in order to get the cards from the API.
 
 Import the `CardService`
 
@@ -340,7 +354,7 @@ Inject our `CardService` into the component
 constructor(private cardService: CardService) { }
 ```
 
-Add a public `cards` property 
+Add a public `cards` property
 
 ```js
 // cards.component.ts
@@ -360,10 +374,10 @@ ngOnInit() {
 }
 ```
 
-Now that we have the results, let's take advantage of the `*ngFor` structural directive to output the cards into the view. 
+Now that we have the results, let's take advantage of the `*ngFor` structural directive to output the cards into the view.
 
 ```html
-<!-- cards.component.html --> 
+<!-- cards.component.html -->
 <section id="cards" class="container-fluid">
   <div class="row">
     <app-card *ngFor="let card of cards">{{ card.question }}</app-card>
@@ -373,11 +387,11 @@ Now that we have the results, let's take advantage of the `*ngFor` structural di
 
 ### Exercise (15 min)
 
-The cards are all on the screen, but the game isn't much fun if the user is able to see what they're picking. Have the question initially hidden until a user clicks on the card, then reveal the question. 
+The cards are all on the screen, but the game isn't much fun if the user is able to see what they're picking. Have the question initially hidden until a user clicks on the card, then reveal the question.
 
 ## Custom Data Types
 
-Instead of specifying `card` with a type of `any`, let's take advantage of TypeScript and define a `card` type. 
+Instead of specifying `card` with a type of `any`, let's take advantage of TypeScript and define a `card` type.
 
 ```js
 // card.type.ts
@@ -392,9 +406,9 @@ Import our type file into **cards.component.ts**
 ```js
 // cards.component.ts
 import { Card } from '../card/card.type';
-``` 
+```
 
-Change our public `cards` declaration to: 
+Change our public `cards` declaration to:
 
 ```js
 // cards.component.ts
@@ -410,13 +424,13 @@ Import the `FormsModule` into **app.module.ts** and add it to the `imports` arra
 import { FormsModule } from '@angular/forms';
 ```
 
-We want to show a live preview of the question as the user is typing, so we'll make use of two-way data binding, that way as the form value is updated we can ensure the preview is updated as well. 
+We want to show a live preview of the question as the user is typing, so we'll make use of two-way data binding, that way as the form value is updated we can ensure the preview is updated as well.
 
-Let's modify the form by: 
+Let's modify the form by:
 
  - Adding a reference to the form so we can obtain the values entered later
- - Adding a submit handler using the `ngSubmit` event 
- - Modify the input to use two-way data binding for our live preview 
+ - Adding a submit handler using the `ngSubmit` event
+ - Modify the input to use two-way data binding for our live preview
  - Nest our data for organization using the `ngModelGroup` directive  
  - Adding `required` and `maxlength` attributes
 
@@ -437,15 +451,15 @@ Let's modify the form by:
       maxlength="255">
   </fieldset>
 </form>
-``` 
+```
 
-Update the card preview with the bound `question` form value. 
+Update the card preview with the bound `question` form value.
 
 ```html
 <h4 class="card-title">{{ question }}</h4>
 ```
 
-Finally, we need to add the function that gets called when a user submits the form. 
+Finally, we need to add the function that gets called when a user submits the form.
 
 ```js
 // add-card.component.ts
@@ -471,7 +485,7 @@ export class AddCardComponent implements OnInit {
 
 ## Adding New Cards
 
-Now that we're able to get the question that a user submitted, let's modify our `CardService` to save the question to the Cards API. 
+Now that we're able to get the question that a user submitted, let's modify our `CardService` to save the question to the Cards API.
 
 ```js
 // card.service.ts
@@ -482,7 +496,7 @@ addCard(card) {
 }
 ```
 
-Now we'll import `CardService` into **add-card.component.ts** and utilize the service we created. 
+Now we'll import `CardService` into **add-card.component.ts** and utilize the service we created.
 
 ```js
 // add-card.component.ts
@@ -505,12 +519,12 @@ export class AddCardComponent implements OnInit {
 
   handleSubmit(form: NgForm) {
     this.card = form.value.card;
-    
+
     if (!this.card.question) {
       // @TODO Report error in the UI
       return;
     }
-    
+
     this.cardService.addCard(this.card)
       .subscribe(
         card => console.log('Card saved:', card),
@@ -522,7 +536,7 @@ export class AddCardComponent implements OnInit {
 }
 ```
 
-When the card is successfully saved let's redirect the user back to `/cards`. We'll need the `Router` for that. 
+When the card is successfully saved let's redirect the user back to `/cards`. We'll need the `Router` for that.
 
 ```js
 // add-card.component.ts
@@ -546,12 +560,12 @@ export class AddCardComponent implements OnInit {
 
   handleSubmit(form: NgForm) {
     this.card = form.value.card;
-    
+
     if (!this.card.question) {
       // @TODO Report error in the UI
       return;
     }
-    
+
     this.cardService.addCard(this.card)
       .subscribe(
         card => console.log('Card saved:', card),
@@ -570,5 +584,3 @@ $ ng build --prod
 ```
 
 Fini!
-
-
